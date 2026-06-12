@@ -1,0 +1,62 @@
+
+# Define what we harvest and how.
+# Each source uses a 'driver' (module in /harvesters) and specific params.
+license_policy:
+  # Accept these licenses/rights statuses into the public search index.
+  allow:
+    - public_domain
+    - cc-by
+    - cc-by-sa
+    - cc0
+    - cc-by-nd
+    - cc-by-nc
+    - cc-by-nc-sa
+    - cc-by-nc-nd
+  # Block explicit 'closed' or unknown unless you mark allow_unknown true per-source.
+  block:
+    - closed
+    - unknown
+
+sources:
+  - name: internet_archive_pd_esoterica
+    driver: internet_archive
+    allow_unknown: false
+    query: 'subject:(occult OR magic OR esoterica OR alchemy) AND mediatype:texts AND (licenseurl:* OR publicdate:[* TO *])'
+    collections:
+      - americana
+      - europeanlibraries
+      - toronto
+      - additional_collections
+    max_items: 200
+    notes: "Harvest PD/CC scans with OCR text if available; prefer items with licenseurl or PD marker."
+
+  - name: wikisource_occult
+    driver: wikisource
+    languages: ["en", "fr", "de", "it", "es", "la"]
+    search_terms:
+      - "Hermetica"
+      - "Agrippa"
+      - "Picatrix"
+      - "Goetia"
+      - "Corpus Hermeticum"
+    max_items: 150
+
+  - name: gallica_oai_alchimie
+    driver: gallica_oai
+    sets: ["gallica"]
+    subject_contains: ["alchimie", "magie", "kabbale"]
+    date_before: "1930-01-01"
+    max_items: 150
+
+  - name: wellcome_occult
+    driver: wellcome
+    q: 'alchemy OR occult OR hermetic OR magic'
+    work_types: ["Books", "Archives and manuscripts"]
+    date_before: 1930
+    max_items: 150
+
+  - name: doaj_esoterica_recent
+    driver: doaj_crossref_unpaywall
+    q: 'esotericism OR occultism OR magic anthropology OR miracle studies'
+    from_year: 1990
+    max_items: 200

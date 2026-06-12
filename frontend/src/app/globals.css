@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+  --bg: #f8f9fb;
+  --fg: #202124;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(32, 33, 36, 0.08);
+  --chip-bg: rgba(32, 33, 36, 0.08);
+  --badge-border: rgba(95, 99, 104, 0.4);
+}
+
+html.dark {
+  --bg: #0b0c0f;
+  --fg: #e5e7eb;
+  --card-bg: rgba(24, 26, 29, 0.9);
+  --card-border: rgba(250, 250, 250, 0.08);
+  --chip-bg: rgba(70, 72, 77, 0.4);
+  --badge-border: rgba(148, 163, 184, 0.4);
+}
+
+body {
+  @apply min-h-screen font-sans antialiased transition-colors duration-300;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+.card {
+  @apply rounded-2xl shadow-lg backdrop-blur border;
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs;
+  border: 1px solid var(--badge-border);
+}
+
+.chip {
+  @apply inline-flex items-center rounded-full px-3 py-1 text-xs;
+  background-color: var(--chip-bg);
+}
+
+.search-shell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.search-shell:focus-within {
+  border-color: rgba(66, 133, 244, 0.45);
+  box-shadow: 0 1px 6px rgba(66, 133, 244, 0.35);
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: var(--fg);
+}
+
+.search-input::placeholder {
+  color: rgba(95, 99, 104, 0.7);
+}
+
+html.dark .search-shell {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+html.dark .search-input::placeholder {
+  color: rgba(189, 193, 198, 0.65);
+}
+
+.babylon-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 40;
+}
+
+.babylon-heart {
+  position: absolute;
+  bottom: -12%;
+  animation-name: babylon-heart-rise;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
+}
+
+@keyframes babylon-heart-rise {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.05);
+    opacity: 0;
+  }
+}
+
+.babylon-tower-rise {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 120%);
+  animation: babylon-rise 1.4s ease-out forwards;
+}
+
+.babylon-tower {
+  width: clamp(180px, 52vw, 360px);
+  max-height: 68vh;
+  object-fit: contain;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.3));
+  animation: babylon-shake 1.05s ease-in-out infinite alternate;
+  animation-delay: 0.9s;
+}
+
+@keyframes babylon-rise {
+  0% {
+    transform: translate(-50%, 120%) scale(0.25) rotate(-2deg);
+  }
+  60% {
+    transform: translate(-50%, 12%) scale(1.08) rotate(1.5deg);
+  }
+  100% {
+    transform: translate(-50%, 0%) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes babylon-shake {
+  0% {
+    transform: translate(-50%, 0) rotate(-1.4deg) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -4px) rotate(1.2deg) scale(1.02);
+  }
+  100% {
+    transform: translate(-50%, 2px) rotate(-0.8deg) scale(0.99);
+  }
+}
+
+@media (max-width: 640px) {
+  .babylon-overlay {
+    inset: 0 0 -8vh 0;
+  }
+  .babylon-heart {
+    font-size: 14px;
+    animation-duration: 7s;
+  }
+  .babylon-tower {
+    width: clamp(170px, 70vw, 300px);
+    max-height: 55vh;
+  }
+}

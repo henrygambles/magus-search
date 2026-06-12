@@ -1,0 +1,6 @@
+# Pipeline options
+# Local OCR requires tesseract installed on your system.
+downloads_dir: "downloads"
+delete_downloads_after: true
+max_docs_per_run: 200
+chunk_max_chars: 1200
