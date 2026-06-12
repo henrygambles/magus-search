@@ -2,6 +2,8 @@
 
 Magus Search is a small, end-to-end search engine for magic, esoterica, and miracle texts. It includes a sample corpus, a FastAPI backend, a Next.js UI, and an optional harvesting pipeline.
 
+<img width="1052" height="645" alt="Screenshot 2026-06-12 at 10 20 47" src="https://github.com/user-attachments/assets/39040980-0dcf-417d-8aa3-c393f54d5c68" />
+
 ## Features
 - FastAPI search API over a small local corpus.
 - Next.js + Tailwind UI with facets and citations.
