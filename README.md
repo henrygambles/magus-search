@@ -120,3 +120,7 @@ Open an issue to discuss changes before sending a PR.
 
 ## License
 No license file is present. Add a `LICENSE` to clarify usage.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=henrygambles/magus-search&type=Date)](https://star-history.com/#henrygambles/magus-search&Date)
